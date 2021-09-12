@@ -18,8 +18,7 @@ def get_estimated_price(location,sqft, bath, bhk):
     if loc_index >= 0:
         x[loc_index] = 1
 
-def get_location_names():
-    return __locations
+    return round(__model.predict([x])[0],2)
 
 def load_saved_artifacts():
     print("loading saved artifacts...start")
@@ -35,6 +34,16 @@ def load_saved_artifacts():
         __model = pickle.load(f)
     print("loadind saved artifacts....done")
 
+def get_data_columns():
+    return __data_columns
+
+def get_location_names():
+    return __locations
+
 if __name__ == "__main__":
     load_saved_artifacts()
     print(get_location_names())
+    print(get_estimated_price('1st Phase JP Nagar',1000, 3, 3))
+    print(get_estimated_price('1st Phase JP Nagar', 1000, 2, 2))
+    print(get_estimated_price('Kalhalli', 1000, 2, 2)) # other location
+    print(get_estimated_price('Ejipura', 1000, 2, 2))  # other location
